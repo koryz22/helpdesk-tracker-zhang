@@ -1,0 +1,193 @@
+<app-navbar></app-navbar>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-900">My Dashboard</h2>
+    <p class="mt-2 text-gray-600">Manage your assets and service requests</p>
+  </div>
+
+  <!-- Assets Section -->
+  <div class="mb-8">
+    <h3 class="text-xl font-semibold text-gray-900 mb-4">My Assets</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (asset of assets; track asset.assetID) {
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-primary bg-blue-100 rounded-full mb-2">
+                {{ asset.assetType }}
+              </span>
+              <h4 class="text-lg font-semibold text-gray-900">{{ asset.assetName }}</h4>
+              @if (asset.description) {
+                <p class="text-sm text-gray-600 mt-2">{{ asset.description }}</p>
+              }
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <p class="text-gray-500 col-span-full">No assets found</p>
+      }
+    </div>
+  </div>
+
+  <!-- Tickets Section -->
+  <div>
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-semibold text-gray-900">My Tickets</h3>
+      <button
+        (click)="openCreateTicketModal()"
+        class="px-3 py-1.5 bg-primary text-white rounded-md hover:bg-opacity-90 transition-colors font-medium text-sm"
+      >
+        Create New Ticket
+      </button>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Asset</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (ticket of tickets; track ticket.ticketID) {
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4">
+                  <div class="text-sm font-medium text-gray-900">{{ ticket.title }}</div>
+                  @if (ticket.description) {
+                    <div class="text-sm text-gray-500">{{ ticket.description }}</div>
+                  }
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900">{{ ticket.assetName }}</div>
+                  <div class="text-sm text-gray-500">{{ ticket.assetType }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ getPriorityColor(ticket.priority) }}">
+                    {{ ticket.priority }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ getStatusColor(ticket.status) }}">
+                    {{ ticket.status }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ ticket.createdDate | date: 'short' }}
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="px-6 py-4 text-center text-gray-500">No tickets found</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Ticket Modal -->
+@if (showCreateTicketModal) {
+  <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" (click)="closeCreateTicketModal()"></div>
+      
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Create New Ticket</h3>
+          
+          @if (errorMessage) {
+            <div class="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+              {{ errorMessage }}
+            </div>
+          }
+
+          <form (ngSubmit)="createTicket()">
+            <div class="space-y-4">
+              <div>
+                <label for="asset" class="block text-sm font-medium text-gray-700">Asset</label>
+                <select
+                  id="asset"
+                  [(ngModel)]="newTicket.assetID"
+                  name="assetID"
+                  required
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                >
+                  @for (asset of assets; track asset.assetID) {
+                    <option [value]="asset.assetID">{{ asset.assetName }} ({{ asset.assetType }})</option>
+                  }
+                </select>
+              </div>
+
+              <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  [(ngModel)]="newTicket.title"
+                  name="title"
+                  required
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                  placeholder="Enter ticket title"
+                />
+              </div>
+
+              <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea
+                  id="description"
+                  [(ngModel)]="newTicket.description"
+                  name="description"
+                  rows="3"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                  placeholder="Enter ticket description"
+                ></textarea>
+              </div>
+
+              <div>
+                <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
+                <select
+                  id="priority"
+                  [(ngModel)]="newTicket.priority"
+                  name="priority"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                >
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+              <button
+                type="submit"
+                [disabled]="loading"
+                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:col-start-2 sm:text-sm disabled:opacity-50"
+              >
+                {{ loading ? 'Creating...' : 'Create Ticket' }}
+              </button>
+              <button
+                type="button"
+                (click)="closeCreateTicketModal()"
+                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:mt-0 sm:col-start-1 sm:text-sm"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+

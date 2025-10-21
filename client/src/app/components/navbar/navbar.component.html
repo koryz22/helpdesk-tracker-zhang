@@ -1,8 +1,31 @@
 <nav class="bg-primary text-white shadow-lg">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
-      <div class="flex items-center">
-        <h1 class="text-xl font-bold">JPF Help Desk</h1>
+      <div class="flex items-center space-x-8">
+        <button
+          (click)="goHome()"
+          class="text-xl font-bold hover:text-gray-200 transition-colors"
+        >
+          JPF Help Desk
+        </button>
+        @if (currentUser) {
+          <div class="flex space-x-1">
+            <a
+              [routerLink]="currentUser.role === 'Admin' ? '/dashboard/admin' : '/dashboard/user'"
+              routerLinkActive="bg-white bg-opacity-20"
+              class="px-4 py-2 rounded-md hover:bg-white hover:bg-opacity-10 transition-colors font-medium text-sm"
+            >
+              Dashboard
+            </a>
+            <a
+              [routerLink]="currentUser.role === 'Admin' ? '/assets/admin' : '/assets/user'"
+              routerLinkActive="bg-white bg-opacity-20"
+              class="px-4 py-2 rounded-md hover:bg-white hover:bg-opacity-10 transition-colors font-medium text-sm"
+            >
+              Assets
+            </a>
+          </div>
+        }
       </div>
       @if (currentUser) {
         <div class="flex items-center space-x-4">

@@ -23,5 +23,21 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'assets',
+    canActivate: [authGuard],
+    children: [
+      { path: '', redirectTo: 'user', pathMatch: 'full' },
+      {
+        path: 'user',
+        loadComponent: () => import('./components/user-assets/user-assets.component').then(m => m.UserAssetsComponent)
+      },
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+        loadComponent: () => import('./components/admin-assets/admin-assets.component').then(m => m.AdminAssetsComponent)
+      }
+    ]
+  },
   { path: '**', redirectTo: '/login' }
 ];

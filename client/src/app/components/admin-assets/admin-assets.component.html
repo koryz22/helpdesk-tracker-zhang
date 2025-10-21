@@ -69,7 +69,7 @@
   </div>
 
   <!-- Assets Table -->
-  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+  <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
     <div class="px-6 py-4 border-b border-gray-200">
       <h3 class="text-lg font-semibold text-gray-900">
         Assets ({{ filteredAssets.length }} of {{ assets.length }})
@@ -87,7 +87,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           @for (asset of filteredAssets; track asset.assetID) {
-            <tr class="hover:bg-gray-50">
+            <tr class="hover:bg-gray-50 cursor-pointer" [routerLink]="['/assets/detail', asset.assetID]">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm font-medium text-gray-900">{{ asset.assetName }}</div>
               </td>

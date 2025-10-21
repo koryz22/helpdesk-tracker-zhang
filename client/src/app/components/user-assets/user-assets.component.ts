@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AssetService } from '../../services/asset.service';
 import { Asset } from '../../models/asset.model';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-user-assets',
-  imports: [CommonModule, FormsModule, NavbarComponent],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './user-assets.component.html',
   styleUrls: ['./user-assets.component.css']
 })

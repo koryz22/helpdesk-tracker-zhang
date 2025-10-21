@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AssetService } from '../../services/asset.service';
 import { UserService } from '../../services/user.service';
 import { Asset, CreateAsset } from '../../models/asset.model';
@@ -9,7 +10,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-admin-assets',
-  imports: [CommonModule, FormsModule, NavbarComponent],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './admin-assets.component.html',
   styleUrls: ['./admin-assets.component.css']
 })

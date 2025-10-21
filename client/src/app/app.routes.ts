@@ -29,6 +29,10 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'user', pathMatch: 'full' },
       {
+        path: 'detail/:id',
+        loadComponent: () => import('./components/asset-detail/asset-detail.component').then(m => m.AssetDetailComponent)
+      },
+      {
         path: 'user',
         loadComponent: () => import('./components/user-assets/user-assets.component').then(m => m.UserAssetsComponent)
       },

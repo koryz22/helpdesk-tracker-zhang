@@ -7,7 +7,7 @@ import { LoginRequest, LoginResponse, User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://jpf-helpdesk-api.azurewebsites.net/api';
+  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 

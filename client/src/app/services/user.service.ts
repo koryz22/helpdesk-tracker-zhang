@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://jpf-helpdesk-api.azurewebsites.net/api';
+  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api';
 
   constructor(private http: HttpClient) {}
 

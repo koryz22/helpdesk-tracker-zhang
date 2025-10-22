@@ -152,9 +152,9 @@ namespace HelpDeskApi.Migrations
                         {
                             TicketID = new Guid("66666666-6666-6666-6666-666666666661"),
                             AssetID = new Guid("33333333-3333-3333-3333-333333333331"),
-                            CreatedDate = new DateTime(2025, 10, 14, 17, 15, 27, 993, DateTimeKind.Local).AddTicks(1184),
+                            CreatedDate = new DateTime(2025, 10, 16, 21, 36, 2, 96, DateTimeKind.Local).AddTicks(1249),
                             Description = "Annual HVAC maintenance required for San Ramon residence",
-                            LastUpdatedDate = new DateTime(2025, 10, 14, 17, 15, 27, 993, DateTimeKind.Local).AddTicks(1188),
+                            LastUpdatedDate = new DateTime(2025, 10, 16, 21, 36, 2, 96, DateTimeKind.Local).AddTicks(1253),
                             Priority = "Medium",
                             Status = "Open",
                             Title = "HVAC System Maintenance",
@@ -164,9 +164,9 @@ namespace HelpDeskApi.Migrations
                         {
                             TicketID = new Guid("66666666-6666-6666-6666-666666666662"),
                             AssetID = new Guid("44444444-4444-4444-4444-444444444441"),
-                            CreatedDate = new DateTime(2025, 10, 17, 17, 15, 27, 993, DateTimeKind.Local).AddTicks(1192),
+                            CreatedDate = new DateTime(2025, 10, 19, 21, 36, 2, 96, DateTimeKind.Local).AddTicks(1258),
                             Description = "Scheduled oil change and brake inspection",
-                            LastUpdatedDate = new DateTime(2025, 10, 18, 17, 15, 27, 993, DateTimeKind.Local).AddTicks(1193),
+                            LastUpdatedDate = new DateTime(2025, 10, 20, 21, 36, 2, 96, DateTimeKind.Local).AddTicks(1259),
                             Priority = "High",
                             Status = "In Progress",
                             Title = "BMW M4 Oil Change",
@@ -208,9 +208,9 @@ namespace HelpDeskApi.Migrations
                         new
                         {
                             UserID = new Guid("11111111-1111-1111-1111-111111111111"),
-                            Email = "admin@jpf.com",
-                            FullName = "Admin User",
-                            PasswordHash = "$2a$11$OCmKzeAsBoKRluXcyux0w.RNFU1FsACWjn9SUvjV/jEQsFm5ZonI2",
+                            Email = "kory@jpf.com",
+                            FullName = "Kory Zhang",
+                            PasswordHash = "$2a$11$xRUJGHtE/L0abWvW4gPx2Og.wdHFQqEYIgeQdPjX63oGmB.lvRX/i",
                             Role = "Admin"
                         },
                         new
@@ -218,7 +218,7 @@ namespace HelpDeskApi.Migrations
                             UserID = new Guid("22222222-2222-2222-2222-222222222222"),
                             Email = "john@jpf.com",
                             FullName = "John Doe",
-                            PasswordHash = "$2a$11$OCmKzeAsBoKRluXcyux0w.RNFU1FsACWjn9SUvjV/jEQsFm5ZonI2",
+                            PasswordHash = "$2a$11$xRUJGHtE/L0abWvW4gPx2Og.wdHFQqEYIgeQdPjX63oGmB.lvRX/i",
                             Role = "User"
                         });
                 });

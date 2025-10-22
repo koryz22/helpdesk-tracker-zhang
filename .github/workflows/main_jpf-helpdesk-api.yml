@@ -12,6 +12,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./api
+        
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -62,4 +66,5 @@ jobs:
           app-name: 'jpf-helpdesk-api'
           slot-name: 'Production'
           package: .
+
           

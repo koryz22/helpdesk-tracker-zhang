@@ -61,7 +61,7 @@
           id="filterStatus"
           [(ngModel)]="filterStatus"
           (change)="applyFilters()"
-          class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+          class="block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
         >
           <option value="">All Statuses</option>
           <option value="Open">Open</option>
@@ -76,7 +76,7 @@
           id="filterPriority"
           [(ngModel)]="filterPriority"
           (change)="applyFilters()"
-          class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+          class="block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
         >
           <option value="">All Priorities</option>
           <option value="Low">Low</option>
@@ -90,7 +90,7 @@
           id="filterAssetType"
           [(ngModel)]="filterAssetType"
           (change)="applyFilters()"
-          class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+          class="block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
         >
           <option value="">All Types</option>
           <option value="Home">Home</option>
@@ -123,7 +123,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           @for (ticket of filteredTickets; track ticket.ticketID) {
-            <tr class="hover:bg-gray-50">
+            <tr class="hover:bg-gray-50 cursor-pointer" (click)="viewTicketDetail(ticket.ticketID)">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm font-medium text-gray-900">{{ ticket.userName }}</div>
               </td>
@@ -152,13 +152,13 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <button
-                  (click)="openUpdateModal(ticket)"
+                  (click)="openUpdateModal(ticket); $event.stopPropagation()"
                   class="text-primary hover:text-opacity-80 mr-3"
                 >
                   Edit
                 </button>
                 <button
-                  (click)="deleteTicket(ticket.ticketID)"
+                  (click)="deleteTicket(ticket.ticketID); $event.stopPropagation()"
                   class="text-red-600 hover:text-red-900"
                 >
                   Delete
@@ -218,7 +218,7 @@
                   id="updatePriority"
                   [(ngModel)]="updateData.priority"
                   name="priority"
-                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                  class="mt-1 block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
                 >
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
@@ -232,7 +232,7 @@
                   id="updateStatus"
                   [(ngModel)]="updateData.status"
                   name="status"
-                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                  class="mt-1 block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
                 >
                   <option value="Open">Open</option>
                   <option value="In Progress">In Progress</option>
@@ -292,7 +292,7 @@
                   [(ngModel)]="newTicket.assetID"
                   name="assetID"
                   required
-                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                  class="mt-1 block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
                 >
                   @for (asset of assets; track asset.assetID) {
                     <option [value]="asset.assetID">{{ asset.assetName }} ({{ asset.assetType }}) - {{ asset.userName }}</option>
@@ -331,7 +331,7 @@
                   id="priority"
                   [(ngModel)]="newTicket.priority"
                   name="priority"
-                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
+                  class="mt-1 block w-full pl-3 pr-8 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md border"
                 >
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>

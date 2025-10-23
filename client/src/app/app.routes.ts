@@ -43,5 +43,15 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'tickets',
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'detail/:id',
+        loadComponent: () => import('./components/ticket-detail/ticket-detail.component').then(m => m.TicketDetailComponent)
+      }
+    ]
+  },
   { path: '**', redirectTo: '/login' }
 ];

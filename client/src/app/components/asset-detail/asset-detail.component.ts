@@ -123,5 +123,9 @@ export class AssetDetailComponent implements OnInit {
         return 'bg-gray-100 text-gray-800';
     }
   }
+
+  viewTicketDetail(ticketId: string): void {
+    this.router.navigate(['/tickets/detail', ticketId]);
+  }
 }
 

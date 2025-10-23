@@ -7,7 +7,8 @@ import { Asset, CreateAsset } from '../models/asset.model';
   providedIn: 'root'
 })
 export class AssetService {
-  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api';
+  // private apiUrl = 'http://localhost:5024/api/assets';
+  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api/assets';
 
   constructor(private http: HttpClient) {}
 

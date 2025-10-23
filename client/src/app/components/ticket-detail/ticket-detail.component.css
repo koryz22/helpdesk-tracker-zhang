@@ -1,0 +1,43 @@
+/* Ticket Detail Component Styles */
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 2rem;
+  bottom: -1rem;
+  width: 2px;
+  background-color: #e5e7eb;
+}
+
+.timeline-icon {
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom scrollbar for timeline if needed */
+.timeline-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.timeline-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

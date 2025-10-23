@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Back Button -->
+  <div class="mb-6">
+    <button
+      (click)="goBack()"
+      class="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+    >
+      <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Dashboard
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  @if (errorMessage) {
+    <div class="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <p class="mt-2 text-gray-600">Loading ticket details...</p>
+    </div>
+  }
+
+  <!-- Ticket Details -->
+  @if (ticket && !loading) {
+    <div class="space-y-8">
+      <!-- Ticket Information -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+          <h1 class="text-2xl font-bold text-gray-900">Ticket Details</h1>
+        </div>
+        <div class="px-6 py-6">
+          <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Title</dt>
+              <dd class="mt-1 text-md font-semibold text-gray-900">{{ ticket.title }}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Priority</dt>
+              <dd class="mt-1">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold {{ getPriorityColor(ticket.priority) }}">
+                  {{ ticket.priority }}
+                </span>
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Description</dt>
+              <dd class="mt-1 text-md text-gray-900">{{ ticket.description || 'No description provided' }}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Status</dt>
+              <dd class="mt-1">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold {{ getStatusColor(ticket.status) }}">
+                  {{ ticket.status }}
+                </span>
+              </dd>
+            </div>
+            
+            @if (isAdmin) {
+              <div>
+                <dt class="text-sm font-medium text-gray-500">User</dt>
+                <dd class="mt-1 text-md text-gray-900">{{ ticket.userName }}</dd>
+              </div>
+            }
+            <div>
+                <dt class="text-sm font-medium text-gray-500">Created Date</dt>
+                <dd class="mt-1 text-md text-gray-900">{{ ticket.createdDate | date: 'short' }}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Last Updated</dt>
+              <dd class="mt-1 text-md text-gray-900">{{ ticket.lastUpdatedDate | date: 'short' }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Activity Timeline -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+          <h2 class="text-xl font-semibold text-gray-900">Activity Timeline</h2>
+        </div>
+        <div class="px-6 py-6">
+          <div class="relative">
+            <!-- Connecting line across full width -->
+            <div class="absolute top-4 left-0 right-0 h-0.5 bg-gray-200"></div>
+            
+            <!-- Timeline items distributed across full width -->
+            <div class="flex justify-between">
+              @for (event of timelineEvents; track event.id) {
+                <div class="flex flex-col items-center text-center flex-1">
+                  <!-- Icon -->
+                  <div class="relative z-10">
+                    <span class="h-8 w-8 rounded-full {{ getTimelineColor(event.type) }} flex items-center justify-center ring-8 ring-white">
+                      <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="getTimelineIcon(event.type)" />
+                      </svg>
+                    </span>
+                  </div>
+                  
+                  <!-- Content -->
+                  <div class="mt-3 px-2">
+                    <p class="text-xs font-medium text-gray-900">{{ event.title }}</p>
+                    <p class="text-xs text-gray-500">{{ event.description }}</p>
+                    <!-- @if (event.user) {
+                      <p class="text-xs text-gray-400">by {{ event.user }}</p>
+                    } -->
+                    <p class="text-xs text-gray-400 mt-1">{{ event.timestamp | date: 'short' }}</p>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

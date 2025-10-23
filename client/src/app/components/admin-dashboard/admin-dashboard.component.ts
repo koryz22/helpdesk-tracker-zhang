@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { TicketService } from '../../services/ticket.service';
 import { AssetService } from '../../services/asset.service';
@@ -39,7 +40,8 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private ticketService: TicketService,
     private assetService: AssetService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -195,6 +197,10 @@ export class AdminDashboardComponent implements OnInit {
       return user.fullName.split(' ')[0];
     }
     return 'User';
+  }
+
+  viewTicketDetail(ticketId: string): void {
+    this.router.navigate(['/tickets/detail', ticketId]);
   }
 }
 

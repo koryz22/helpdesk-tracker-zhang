@@ -7,7 +7,8 @@ import { Ticket, CreateTicket, UpdateTicket } from '../models/ticket.model';
   providedIn: 'root'
 })
 export class TicketService {
-  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api';
+  // private apiUrl = 'http://localhost:5024/api/tickets';
+  private apiUrl = 'https://jpf-helpdesk-api-cghmhpe4f0ewe2dk.centralus-01.azurewebsites.net/api/tickets';
 
   constructor(private http: HttpClient) {}
 

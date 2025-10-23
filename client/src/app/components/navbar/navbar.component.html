@@ -31,9 +31,6 @@
         <div class="flex items-center space-x-4">
           <span class="text-sm">
             {{ currentUser.fullName }}
-            @if (currentUser.role === 'Admin') {
-              <span class="ml-2 px-2 py-1 bg-white text-primary text-xs rounded-full font-semibold">Admin</span>
-            }
           </span>
           <button
             (click)="logout()"

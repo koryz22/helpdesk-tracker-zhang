@@ -5,63 +5,52 @@ A lightweight, full-stack Help Desk Management system built with ASP.NET Core We
 ## Project Structure
 
 ```
-├── api/                    # Backend API
-│   ├── Controllers/        # API endpoints
+├── api/                   # Backend Directory
+│   ├── Controllers/       # API endpoints
 │   ├── Models/            # Entity models
 │   ├── DTOs/              # Data transfer objects
 │   ├── Services/          # Business logic
 │   └── Data/              # Database context
-├── client/                # Frontend Angular app
+├── client/                # Frontend Directory
+│   ├── public/            # Public Images
 │   ├── src/app/
 │   │   ├── components/    # Angular components
-│   │   ├── services/      # Angular services
+│   │   ├── guards/        # Route guards
+│   │   ├── interceptors/  # HTTP interceptors
 │   │   ├── models/        # TypeScript models
-│   │   └── guards/        # Route guards
+│   │   └── services/      # Angular services
 └── README.md
 ```
-
-## Key Technologies
-
-- **Backend**: ASP.NET Core, Entity Framework Core, JWT Authentication
-- **Frontend**: Angular 20, TypeScript, TailwindCSS
-- **Database**: SQL Server
-- **Security**: BCrypt password hashing
 
 ## Setup Steps
 
 ### Prerequisites
-- .NET 9 SDK
-- Angular CLI
-- Node.js (v18 or higher)
+- .NET 9.0.305
+- Angular CLI 20.3.6
+- Node.js v22.19.0
 
 ### Backend Setup
 1. Navigate to `api/` directory
 2. Check/Update SQL connection string in `appsettings.json`
-3. Run migrations: `dotnet ef database update`
-4. Start the API: `dotnet run`
+3. Start backend server: `dotnet run`
 
 ### Frontend Setup
 1. Navigate to `client/` directory
 2. Install dependencies: `npm install`
-3. Start development server: `ng serve`
+3. Start frontend client: `ng serve`
 4. Open browser to `http://localhost:4200`
 
 ## Schema Notes
-
-- **Users**: Authentication and role management
+- **Users**: Authentication and Role Management
   - Added *PasswordHash* column to store user password
   - Added *Role* column for admin / user specific login
-- **Assets**: IT asset tracking and management
+- **Assets**: Tracking and Management
   - Added *UserID* foreign key to create assest linkage to user
-- **Tickets**: Support ticket system with status tracking
+- **Tickets**: Ticket System with Status Tracking
 
 ## Design Rationale
-
-- **Separation of Concerns**: Clear separation between frontend and backend
-- **RESTful API**: Standard HTTP methods and status codes
-- **Security First**: JWT authentication with password hashing
-- **Responsive Design**: Mobile-first approach with TailwindCSS
-- **Scalable Architecture**: Modular components and services
+- **Asset-centric Approach**: I built the application around assets because users will most likely open service tickets for those assets.
+- **User vs. Admin Roles**: Following the first line of reasoning, it made sense to create users as well as admin roles who will oversee the HelpDesk Application. Users should only see their own assets and tickets for privacy. Admins see everything to provide support — this mirrors real world support ticket systems.
 
 ## Estimated Time Spent
 - **Deployment**: 5 hrs

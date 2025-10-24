@@ -20,6 +20,8 @@ namespace HelpDeskApi.Controllers
             _context = context;
         }
         
+        // [Endpoint]: GET /api/tickets
+        // [Description]: Returns all tickets
         [HttpGet]
         public async Task<IActionResult> GetTickets()
         {
@@ -58,6 +60,8 @@ namespace HelpDeskApi.Controllers
             return Ok(tickets);
         }
         
+        // [Endpoint]: GET /api/tickets/{id}
+        // [Description]: Returns ticket details including linked asset and user
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTicket(Guid id)
         {
@@ -95,6 +99,8 @@ namespace HelpDeskApi.Controllers
             return Ok(ticket);
         }
         
+        // [Endpoint]: POST /api/tickets
+        // [Description]: Creates a new ticket
         [HttpPost]
         public async Task<IActionResult> CreateTicket([FromBody] CreateTicketDto ticketDto)
         {
@@ -157,6 +163,8 @@ namespace HelpDeskApi.Controllers
             return CreatedAtAction(nameof(GetTicket), new { id = ticket.TicketID }, createdTicket);
         }
         
+        // [Endpoint]: PUT /api/tickets/{id}
+        // [Description]: Updates ticket status, priority, or assignment
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTicket(Guid id, [FromBody] UpdateTicketDto updateDto)
         {
@@ -213,6 +221,8 @@ namespace HelpDeskApi.Controllers
             return Ok(updatedTicket);
         }
         
+        // [Endpoint]: PUT /api/tickets/{id}
+        // [Description]: Deletes a ticket
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(Guid id)
         {

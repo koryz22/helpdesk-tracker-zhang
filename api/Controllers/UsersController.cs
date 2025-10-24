@@ -18,6 +18,8 @@ namespace HelpDeskApi.Controllers
             _context = context;
         }
         
+        // [Endpoint]: GET /api/users
+        // [Description]: Returns all users (Admin only)
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsers()

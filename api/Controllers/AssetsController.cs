@@ -20,6 +20,8 @@ namespace HelpDeskApi.Controllers
             _context = context;
         }
         
+        // [Endpoint]: GET /api/assets
+        // [Description]: Returns all assets
         [HttpGet]
         public async Task<IActionResult> GetAssets()
         {
@@ -49,6 +51,8 @@ namespace HelpDeskApi.Controllers
             return Ok(assets);
         }
         
+        // [Endpoint]: POST /api/assets
+        // [Description]: Creates an asset
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAsset([FromBody] CreateAssetDto assetDto)

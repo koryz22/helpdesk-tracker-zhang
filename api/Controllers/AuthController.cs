@@ -15,6 +15,8 @@ namespace HelpDeskApi.Controllers
             _authService = authService;
         }
         
+        // [Endpoint]: POST /api/auth/login
+        // [Description]: Authenticates user and returns JWT token
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {

@@ -70,7 +70,7 @@
       <div class="relative h-64 flex items-center justify-center">
         <svg viewBox="0 0 200 200" class="w-48 h-48" style="pointer-events: none;">
           <!-- Pie chart segments -->
-          @for (segment of getPieChartData(); track segment.label; let idx = $index) {
+          @for (segment of pieChartData; track segment.label; let idx = $index) {
             <path
               [attr.d]="segment.path"
               [attr.fill]="segment.color"
@@ -95,7 +95,7 @@
       
       <!-- Legend -->
       <div class="mt-4 grid grid-cols-2 gap-2">
-        @for (item of getPieChartData(); track item.label) {
+        @for (item of pieChartData; track item.label) {
           <div class="flex items-center">
             <div class="w-3 h-3 rounded-full mr-2" [style.background-color]="item.color"></div>
             <span class="text-xs text-gray-600 font-medium">{{ item.label }}</span>
